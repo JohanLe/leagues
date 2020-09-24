@@ -1,0 +1,138 @@
+.navbar {
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #333;
+  padding: 0 1rem;
+}
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navbar .navbar-nav {
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+.navbar .nav-item {
+  width: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar .nav-item:hover {
+  background-color: #d5c395;
+}
+.navbar .dropdown {
+  z-index: 100;
+  position: absolute;
+  top: 58px;
+  left: 0;
+  width: 300px;
+  background-color: #333;
+  border: 1px solid black;
+  padding: 1rem;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.navbar .dropdown :hover {
+  opacity: 20%;
+}
+.navbar .menu {
+  width: 100%;
+}
+.navbar .menu-item {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  color: white;
+  border-radius: 5px;
+}
+
+.leaderboard {
+  width: 60%;
+  border: 1px solid black;
+  padding-left: 10px;
+}
+.leaderboard .row {
+  display: flex;
+  justify-content: space-evenly;
+}
+.leaderboard .row .col {
+  flex: 1;
+  height: 2rem;
+}
+.leaderboard .row-header {
+  font-weight: 600;
+}
+
+.form {
+  position: relative;
+  top: 20px;
+  left: 15%;
+  width: 70%;
+  background-color: #fefefe;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.form label {
+  margin-bottom: 20px;
+  width: 50%;
+  overflow: hidden;
+}
+.form label span {
+  display: block;
+}
+.form label input {
+  width: 70%;
+}
+
+.form-btn-right .submit {
+  width: 50px;
+  background-color: green;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 4px;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  background-color: #f7f0f0;
+}
+
+.base-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-areas: "navbar" "main" "footer";
+  grid-template-rows: 50px auto 70px;
+}
+
+.navbar {
+  grid-area: "navbar";
+}
+
+.main-content {
+  grid-area: "main";
+  min-height: 100%;
+}
+
+.footer {
+  margin-top: 30px;
+  grid-area: "footer";
+  border-top: 1px solid black;
+}
+
+.small-info-span {
+  color: #484343;
+  font-weight: 400;
+  font-size: 0.7rem;
+}
+
+/*# sourceMappingURL=index.css.map */

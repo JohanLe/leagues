@@ -1,0 +1,17 @@
+.leaderboard {
+  width: 60%;
+  border: 1px solid black;
+  padding-left: 10px;
+
+  .row {
+    display: flex;
+    justify-content: space-evenly;
+    .col {
+      flex: 1;
+      height: 2rem;
+    }
+  }
+  .row-header {
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,41 @@
+@import "./Navbar.scss";
+@import "./Leaderboard.scss";
+@import "./Forms.scss";
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  background-color: rgb(247, 240, 240);
+}
+
+.base-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-areas:
+    "navbar"
+    "main"
+    "footer";
+    grid-template-rows: 50px auto 70px;
+}
+
+.navbar {
+  grid-area: "navbar";
+}
+
+.main-content {
+  grid-area: "main";
+  min-height: 100%;
+}
+.footer {
+  margin-top: 30px;
+  grid-area: "footer";
+  border-top: 1px solid black;
+}
+
+.small-info-span {
+  color: rgb(72, 67, 67);
+  font-weight: 400;
+  font-size: 0.7rem;
+}

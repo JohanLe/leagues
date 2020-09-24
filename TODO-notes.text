@@ -1,0 +1,44 @@
+TODO när grunden är lagd.
+* När user loggar in, hämta hem all dess data direkt >så man kan se dess namn,
+ hcp osv samt ligor den >spelar i.
+
+* Notiser/Meddelande vid inbjudan
+    - Skapa en Notis/Meddelande component, ligger i header & en undersida?
+
+* Regler och säkerhet när liga skapas
+    - Säker att ligas ska skapas?
+    - Finns namnet?
+* Regler vid user skapandet.
+    - Kan ej ändra email till någon annans.
+    - Golf id måste vara unikt.    
+      
+
+__________________________________
+
+
+__________________________________
+
+
+
+
+
+TODO // FIXME  Frontend
+
+* Hämta all user data vid inlogg, spara sedan lokalt
+    för att slippa hämta user om och om igen.
+    (Se home, settings osv..)
+* Lika dant med liga data.
+
+* Säkerhet 
+    - Inputs
+        - Kontroller så endast rätt saker kan skrivas in
+        - XSS (<script>..</script>)
+
+
+
+
+
+
+        -------------------
+        Random temporary Notes
+
