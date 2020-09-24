@@ -36,7 +36,7 @@ function idGenerator(length) {
   return result;
 }
 
-//FIXME Gö alla funktioner async istället för .then?
+//FIXME Gö alla funktioner async
 class Database {
   /**
    *
@@ -85,7 +85,11 @@ class Database {
       });
     return res.data();
   }
-
+  /**
+   * Update user data
+   * @param {*} userId
+   * @param {*} userData
+   */
   updateUser(userId, userData) {
     var userDoc = db.collection("users").doc(userId);
 
@@ -112,7 +116,7 @@ class Database {
   /** League related **/
   /**
    * Creates a new Doc in League Collection
-   * @param {*} userId // todo ändra till user så man får med namn, golf id & id.
+   * @param {*} userId
    * @param {*} leagueName
    */
   createLeague(userId, leagueName) {
@@ -175,30 +179,10 @@ class Database {
   /**
    * Register new round
    */
-  registerNewRound(roundData, leagueId) {
-    /**
-     * //TODO
-     *  Registera data under liga
-     *  Registrera varje individs rond under deras rundor tillsammns med rondID
-     *
-     */
-
+  async registerNewRound(roundData, leagueId) {
     let regRoundRef = firebase.functions().httpsCallable("registerRound");
 
-    regRoundRef({ leagueId: leagueId, round: roundData })
-      .then((res) => {
-        console.log("Register good ", res);
-        return res;
-
-        // if OK return home and remove invite from frontend.
-      })
-      .catch((e) => {
-        console.log("Failed to registerround");
-        console.log(e);
-        return e;
-      });
-
-    return "register round";
+    return await regRoundRef({ leagueId: leagueId, round: roundData });
   }
 
   async getLastUpdated(col, doc) {

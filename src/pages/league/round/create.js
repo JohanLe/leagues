@@ -32,12 +32,13 @@ export default class newRound extends Component {
      */
     try {
       let roundData = {
-        club: parseInt(this.state.club),
+        club: this.state.club,
         course: this.state.course,
-        date: parseInt(this.state.date),
-        results: parseInt(this.state.results),
+        date: this.state.date,
+        results: this.state.results,
       };
-      db.registerNewRound(roundData, this.state.leagueId);
+      let status = db.registerNewRound(roundData, this.state.leagueId);
+      console.log(status);
     } catch (error) {
       console.log("ERROR");
       console.log(error);

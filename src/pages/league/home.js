@@ -18,19 +18,24 @@ export default class Home extends Component {
   displayLeaderboard() {
     return (
       <div className='leaderboard'>
-        <h3>Leaderboard <span className="small-info-span">Sorted by points</span></h3>
+        <h3>
+          Leaderboard <span className='small-info-span'>Sort by points later on</span>
+        </h3>
         <div className='row row-header'>
           <div className='col'>Position</div>
           <div className='col'>Player</div>
+          <div className='col'>Rounds played</div>
           <div className='col'>Net score</div>
           <div className='col'>Gross score</div>
           <div className='col'>Points</div>
+
         </div>
         {this.state.league.leaderboard.map((score, index) => {
           return (
             <div className='row' key={score.player.uid}>
               <div className='col'>{index + 1}</div>
               <div className='col'>{score.player.name}</div>
+              <div className='col'>{score.roundsPlayed}</div>
               <div className='col'>{score.net}</div>
               <div className='col'>{score.gross}</div>
               <div className='col'>{score.points}</div>
@@ -41,6 +46,9 @@ export default class Home extends Component {
     );
   }
 
+  /**
+   * Controlls if league data in downloaded and up to date, if not download and save to sessionstorage
+   */
   async componentDidMount() {
     let that = this;
     //TODO selectedLeague - Fixa så man kan välja mellan flera ligor.
@@ -61,7 +69,9 @@ export default class Home extends Component {
         leagueRounds.forEach((doc) => {
           rounds.push(doc.data());
         });
-        leagueData["leaderboard"] = calc.summarizeRounds(rounds, "points");;
+
+        // TODO Gör en cloudfunction på detta istället och hämta fördig sorterad data?
+        leagueData["leaderboard"] = calc.summarizeRounds(rounds, "points");
 
         ssh.set("league", leagueData);
         that.setState({ league: leagueData });
@@ -80,7 +90,10 @@ export default class Home extends Component {
     return (
       <div>
         {this.state.league ? (
-          this.displayLeaderboard()
+          <div>
+            {this.displayLeaderboard()}
+            <p>Number rounds: {this.state.league.leaderboard.length+1}</p>
+          </div>
         ) : (
           <p>Leaderboard loading..</p>
         )}

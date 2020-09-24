@@ -42,6 +42,7 @@ let App = () => {
           <Dropdown>
             <DropdownItem href='/league/ChippTrePutt-123abc987/manage'>Manage</DropdownItem>
             <DropdownItem href='/league/ChippTrePutt-123abc987/settings'>Settings</DropdownItem>
+            <DropdownItem href='/league/ChippTrePutt-123abc987/round/create'>Register round</DropdownItem>
           </Dropdown>
         </NavItem>
       </Navbar>
