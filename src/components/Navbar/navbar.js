@@ -1,20 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Route, Redirect } from "react-router-dom";
+import { AuthContext } from "../../firebase/auth";
 
-class Navbar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+const Navbar = (props) => {
+  const { currentUser } = useContext(AuthContext);
+  console.log("Is auth", currentUser);
 
-  render() {
-    return (
-      <nav className='navbar'>
-        <ul className='navbar-nav'>
-          {this.props.children}
-        </ul>
-      </nav>
-    );
+  if (currentUser) {
   }
-}
+  return (
+    <nav className='navbar'>
+      <ul className='navbar-nav'>
+        {props.children}
+      </ul>
+    </nav>
+  );
+};
 
 export default Navbar;

@@ -18,6 +18,7 @@ export default class Home extends Component {
   componentDidMount() {
     let that = this;
     firebase.auth().onAuthStateChanged(async function (user) {
+      console.log(user);
       if (user) {
         let userData = await db.getUser(user.uid);
         that.setState({

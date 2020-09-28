@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Database from "../firebase/database";
+//import Database from "../firebase/database";
 import firebase from "firebase/app";
 import "firebase/functions";
 
-const db = new Database();
+// const db = new Database();
 export default class leagueInvite extends Component {
   constructor(props) {
     super(props);

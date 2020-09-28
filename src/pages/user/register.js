@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Auth from '../../firebase/auth.js';
+import { Auth } from "../../firebase/auth.js";
 
 const auth = new Auth();
 
@@ -29,7 +29,10 @@ export default class RegisterUser extends Component {
   submitForm(event) {
     event.preventDefault();
     try {
-      auth.createUser({password: this.state.password, email: this.state.email}); 
+      auth.createUser({
+        password: this.state.password,
+        email: this.state.email,
+      });
       // reset registerForm
     } catch (error) {
       console.log("ERROR");
@@ -72,9 +75,6 @@ export default class RegisterUser extends Component {
   }
 
   render() {
-    return <div>
-        {this.RegisterForm()}
-
-    </div>;
+    return <div>{this.RegisterForm()}</div>;
   }
 }

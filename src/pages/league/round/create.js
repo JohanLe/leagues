@@ -144,7 +144,6 @@ export default class newRound extends Component {
   componentDidMount() {
     let that = this;
     firebase.auth().onAuthStateChanged(async function (user) {
-      let userData;
       if (user) {
         let userData = await db.getUser(user.uid);
         let leagueId = userData.leagues[0].id;

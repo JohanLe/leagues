@@ -61,7 +61,6 @@ export default class Manage extends Component {
   componentDidMount() {
     let that = this;
     firebase.auth().onAuthStateChanged(async function (user) {
-      let userData;
       if (user) {
         let userData = await db.getUser(user.uid);
         console.log(userData);

@@ -17,8 +17,12 @@ export default class Item extends Component {
 
   render() {
     return (
-      <li className='nav-item' onMouseEnter={this.changeOpenState} onMouseLeave={this.changeOpenState}>
-        <a href={this.props.href}>{this.props.title}</a>
+      <li
+        className='nav-item'
+        onMouseEnter={this.changeOpenState}
+        onMouseLeave={this.changeOpenState}
+      >
+        <a href={this.props.href} onClick={this.props.onClick}>{this.props.title}</a>
         {this.state.open && this.props.children}
       </li>
     );

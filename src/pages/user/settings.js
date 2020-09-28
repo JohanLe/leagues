@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import Auth from "../../firebase/auth.js";
 import Database from "../../firebase/database.js";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -44,7 +43,6 @@ export default class RegisterUser extends Component {
   }
 
   componentDidMount() {
-    let userData;
     let that = this;
     firebase.auth().onAuthStateChanged(async function (user) {
       if (user) {
