@@ -31,7 +31,7 @@ let App = () => {
     <div className='App base-grid'>
       <AuthProvider>
         <Navbar className='navbar'>
-          <NavItem title='Home' href='/'></NavItem>
+          <NavItem title='Home' always={true} href='/'></NavItem>
 
           <NavItem
             title='League'
@@ -59,7 +59,7 @@ let App = () => {
               </DropdownItem>
             </Dropdown>
           </NavItem>
-          <NavItem title='User' href='/user'>
+          <NavItem title='User' always={true} href='/user'>
             <Dropdown>
               <DropdownItem href='/auth/signin'>Sign in</DropdownItem>
               <DropdownItem href='/auth/register'>Register</DropdownItem>

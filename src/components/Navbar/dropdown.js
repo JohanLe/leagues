@@ -7,11 +7,9 @@ const Dropdown = (props) => {
 
   useEffect(() => {
     let dropdownItems;
-    console.log("dropdown props: ", props);
     if (currentUser) {
       dropdownItems = props.children.map((child) => {
-        console.log("child: ", child);
-        if (child.props.hasOwnProperty("protected") && child.props.protected)
+        if (child.props.hasOwnProperty("protected") && child.props.protected || child.props.hasOwnProperty("always"))
           return child;
       });
     } else {
@@ -20,7 +18,6 @@ const Dropdown = (props) => {
       });
     }
     setChildren([dropdownItems]);
-    console.log({ children });
   });
   return <div className='dropdown'>{children}</div>;
 };

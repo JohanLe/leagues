@@ -4,7 +4,6 @@ import { AuthContext } from "../../firebase/auth";
 
 const ProtectedRoute = ({ component: RouteComponent, ...rest }) => {
   const { currentUser } = useContext(AuthContext);
-  console.log("Is auth", currentUser);
 
   return (
     <Route
