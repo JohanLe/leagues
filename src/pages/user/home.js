@@ -7,14 +7,6 @@ export default class home extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    console.log(this.props);
-    if (this.props.auth) {
-      console.log("IS AUTH");
-    } else {
-      console.log("NOT AUTH");
-    }
-  }
 
   render() {
     return (

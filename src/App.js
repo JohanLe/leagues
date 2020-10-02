@@ -59,18 +59,17 @@ let App = () => {
               </DropdownItem>
             </Dropdown>
           </NavItem>
-          <NavItem title='User' always={true} href='/user'>
+          <NavItem title='User' protected={true} href='/user'>
             <Dropdown>
-              <DropdownItem href='/auth/signin'>Sign in</DropdownItem>
-              <DropdownItem href='/auth/register'>Register</DropdownItem>
               <DropdownItem href='/user/settings' protected={true}>
                 Settings
               </DropdownItem>
-              <DropdownItem href='#' onClick={auth.signOut}>
-                SignOut
-              </DropdownItem>
             </Dropdown>
           </NavItem>
+          <NavItem title='Sign in' href='/auth/signin' />
+
+          <NavItem title='Register' href='/auth/register' />
+
         </Navbar>
 
         <Router>

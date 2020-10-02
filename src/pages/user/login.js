@@ -8,22 +8,39 @@ const auth = new Auth();
 const db = new Database();
 const ssh = new Session();
 
-export default Login => {
-  const handleLogin = useCallback(
-    async (event) => {
-      event.preventDefault();
-      const { email, password } = event.target.elements;
-      let eValue = email.value;
-      let pValue = password.value;
-      console.log(eValue, pValue);
-      auth.login({eValue, pValue });
-    },
-  );
+export default (Login) => {
 
-  const { currentUser } = useContext(AuthContext);
+  /**
+   * Get user data from db and set to session.
+   * @param {} userId 
+   */
+  const getUserData = async (userId) => {
+    let userData = await db.getUser(userId);
+    ssh.set("user", userData);
+  };
 
-  if (currentUser) {
-    return <Redirect to='/' />;
+  const handleLogin = useCallback(async (event) => {
+    event.preventDefault();
+    const { email, password } = event.target.elements;
+    let eValue = email.value;
+    let pValue = password.value;
+
+    auth.login({ eValue, pValue });
+  });
+
+  /**
+   * Check if signed in work - if so get userdata and redirect to user home page.
+   */
+  try {
+    const { currentUser } = useContext(AuthContext);
+
+    if (currentUser) {
+      getUserData(currentUser.uid);
+
+      return <Redirect to='/user' />;
+    }
+  } catch (e) {
+    console.log("Login error: ", e);
   }
 
   return (

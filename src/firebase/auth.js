@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import React, { useEffect, useState, useContext } from "react";
+import { Redirect } from "react-router-dom";
 import "firebase/analytics";
 import "firebase/auth";
 import "firebase/firebase-firestore";
@@ -62,6 +63,8 @@ export class Auth {
       .then(function () {
         sessionStorage.clear();
         console.log("User signed out");
+        window.location.reload();
+        return <Redirect to='/' />;
       })
       .catch(function (error) {
         // An error happened.
@@ -82,8 +85,8 @@ export const AuthProvider = ({ children }) => {
     });
   }, []);
 
-  if(pending){
-    return <>Loading...</>
+  if (pending) {
+    return <>Loading...</>;
   }
 
   return (

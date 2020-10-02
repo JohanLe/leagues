@@ -109,6 +109,9 @@ exports.playerInvitedToLeague = functions.firestore
  * //TODO Skriv snyggare kod. dela upp i functioner???
  */
 exports.acceptLeagueInvite = functions.https.onCall(async (data, context) => {
+
+  //FIXME Lägg till league Pathname till usern!!!!! // FIXME
+
   let league, user, leagueRef, userRef;
   leagueRef = admin.firestore().collection("leagues").doc(data.leagueId);
   userRef = admin.firestore().collection("users").doc(data.uid);
@@ -132,7 +135,7 @@ exports.acceptLeagueInvite = functions.https.onCall(async (data, context) => {
       }
     });
     /* 
-     If user is invite
+     If user is invited
      League : Remove user from standingInvites and add to members.
      User: Remove league from leagueInvites and add league id to 
      */
@@ -141,7 +144,6 @@ exports.acceptLeagueInvite = functions.https.onCall(async (data, context) => {
         userIsInvited.index,
         1
       );
-
       await leagueRef
         .update({
           members: admin.firestore.FieldValue.arrayUnion(userIsInvited.invitee),
@@ -188,6 +190,7 @@ exports.acceptLeagueInvite = functions.https.onCall(async (data, context) => {
       let newUserData = {
         leagueInvites: newInviteList,
         leagues: admin.firestore.FieldValue.arrayUnion({
+          pathName: league.pathName,
           name: leagueInviteExists.leagueInvite.leagueName,
           leagueId: leagueInviteExists.leagueInvite.leagueId,
           time: "Add admin.firestore...asdasd.servertime()",
