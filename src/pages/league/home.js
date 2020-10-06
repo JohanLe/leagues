@@ -19,7 +19,8 @@ export default class Home extends Component {
     return (
       <div className='leaderboard'>
         <h3>
-          Leaderboard <span className='small-info-span'>Sort by points later on</span>
+          Leaderboard{" "}
+          <span className='small-info-span'>Sort by points later on</span>
         </h3>
         <div className='row row-header'>
           <div className='col'>Position</div>
@@ -28,17 +29,20 @@ export default class Home extends Component {
           <div className='col'>Net score</div>
           <div className='col'>Gross score</div>
           <div className='col'>Points</div>
-
+          <div className='col'>PPR</div>
         </div>
         {this.state.league.leaderboard.map((score, index) => {
           return (
             <div className='row' key={score.player.uid}>
               <div className='col'>{index + 1}</div>
-              <div className='col'>{score.player.name}</div>
-              <div className='col'>{score.roundsPlayed}</div>
+              <div className='col'>
+                <a href={`/user/${score.player.uid}`}>{score.player.name}</a>
+              </div>
+              <div className='col'>{score.rounds}</div>
               <div className='col'>{score.net}</div>
               <div className='col'>{score.gross}</div>
-              <div className='col'>{score.points}</div>
+              <div className='col'>{score.points}</div> 
+              <div className='col'>{score.points / score.rounds}</div>
             </div>
           );
         })}
@@ -72,14 +76,13 @@ export default class Home extends Component {
 
         // TODO Gör en cloudfunction på detta istället och hämta fördig sorterad data?
         leagueData["leaderboard"] = calc.summarizeRounds(rounds, "points");
-
+        console.log("league calc");
         ssh.set("league", leagueData);
         that.setState({ league: leagueData });
       } else {
         let leagueData = await ssh.get("league");
 
         that.setState({ league: leagueData });
-        console.log(that.state);
       }
     } catch (e) {
       console.log(e);
@@ -92,7 +95,7 @@ export default class Home extends Component {
         {this.state.league ? (
           <div>
             {this.displayLeaderboard()}
-            <p>Number rounds: {this.state.league.leaderboard.length+1}</p>
+            <p>Number rounds: {this.state.league.leaderboard.length + 1}</p>
           </div>
         ) : (
           <p>Leaderboard loading..</p>

@@ -67,7 +67,6 @@ class SessionHelper {
   isSessionDataUpToDate(key, newTime){
     try{
       let data = this.get(key);
-      console.log("Session user data:", data);
       if(data.lastUpdated.seconds !== newTime && data.lastUpdated.seconds - newTime > 1200){
         return false;
       }

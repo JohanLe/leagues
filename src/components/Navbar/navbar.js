@@ -15,7 +15,6 @@ const Navbar = (props) => {
     if (currentUser && userData) {
       items = props.children.map((child) => {
         if (child.props.title === "User") {
-          console.log(userData);
           return (
             <NavItem
               key={child.props.href}

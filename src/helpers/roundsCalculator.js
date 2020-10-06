@@ -1,56 +1,61 @@
 class RoundsCalculator {
-
   /**
-   * @param {*}  Rounds to be calculated from
-   * @param {*}  stat type of stats to calculate from (points, gross, net..)
-   * Calculate total points for each player based.
-   * @return Array of object sorted on points each player has. High -> low
+   *
    */
-  compare(a, b, sortBy) {
-    // FIXME fungerar ej.
-    let comparison = 0;
-    if (a[sortBy] > b[sortBy]) {
-      comparison = 1;
-    } else if (a[sortBy] < b[sortBy]) {
-      comparison = -1;
-    }
-    return comparison * -1;
+  sortArrayOfObject(arr, sortBy) {
+    return arr.sort((a, b) => (a[sortBy] < b[sortBy] ? 1 : -1));
   }
-
   /**
-   * Summerize each players score from each rounds. 
-   * @param {*} rounds 
-   * @param {*} sortBy 
+   * Find index of player in sum
+   * @param {} uid
+   */
+  playerExistsInSum = (sum, uid) => {
+    let playerIndex = null;
+    sum.forEach((player, index) => {
+      if (player.player.uid === uid) {
+        playerIndex = index;
+      }
+    });
+    return playerIndex;
+  };
+  /**
+   * Summerize each players score from each rounds.
+   * @param {*} rounds
+   * @param {*} sortBy
    * @returns Array of objects
    */
-  summarizeRounds(rounds, sortBy = "points") {
+  //TODO Flytta till cloud functions för att kunna hämta en färdig sorterad lista.
+  // Alt. För varje runda - skapa ett doc med leadaren
+  summarizeRounds(rounds) {
     let sum = [];
+    let playerIndexes = [];
     rounds.forEach((round) => {
-      round.results.forEach((playerScore) => {
-        let index = sum.findIndex(
-          (prevScore) => prevScore.player.uid === playerScore.player.uid
-        );
-        if (index > -1) {
-          sum[index].points += parseInt(playerScore.points);
-          sum[index].gross += parseInt(playerScore.gross);
-          sum[index].net += parseInt(playerScore.net);
-          sum[index].roundsPlayed += 1
+      round.results.forEach((res) => {
+        let playerIndex = this.playerExistsInSum(sum, res.player.uid);
+
+        if (playerIndex == "0" || playerIndex) {
+          let player = sum[playerIndex];
+          player.points += parseInt(res.points);
+          player.net += parseInt(res.net);
+          player.gross += parseInt(res.gross);
+          player.rounds += 1;
+          sum[playerIndex] = player;
         } else {
-          let parsedScore = {
-            points: parseInt(playerScore.points),
-            gross: parseInt(playerScore.gross),
-            net:  parseInt(playerScore.net),
-            player: playerScore.player,
-            roundsPlayed: 1
-          }
-          sum.push(parsedScore);
+          let player = {
+            points: parseInt(res.points),
+            net: parseInt(res.net),
+            gross: parseInt(res.gross),
+            rounds: 1,
+            player: { uid: res.player.uid, name: res.player.name },
+          };
+          sum.push(player);
         }
       });
     });
-   // sum.sort(this.compare, sortBy);
+    sum = this.sortArrayOfObject(sum, "points");
+    console.log(sum);
     return sum;
   }
-
 }
 
 export default RoundsCalculator;
